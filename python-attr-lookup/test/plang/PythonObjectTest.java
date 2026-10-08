@@ -150,6 +150,32 @@ class PythonObjectTest {
         assertEqualsPyStr("rainbow",    bar.get("socks"));
     }
 
+    @Test 
+    void overrideInheritedAttrsWithNull() throws Exception{
+        // Equivalent Python:
+        // Foo.socks = "rainbow"
+        // Foo.hat = "cap"
+        // Bar.socks = None     #subtype overrides base type with None
+        // foo.hat = None       #instance overrides its type with None
+        fooType.set("socks", new PythonString("rainbow"));
+        fooType.set("hat", new PythonString("cap"));
+
+        assertEqualsPyStr("rainbow", barType.get("socks"));
+        assertEqualsPyStr("cap",  foo.get("hat"));
+        
+        barType.set("socks", null);
+        foo.set("hat", null);
+
+        assertEqualsPyStr(null, barType.get("socks"));
+        assertEqualsPyStr(null, bar.get("socks"));
+        assertEqualsPyStr(null, foo.get("hat"));
+
+        assertEqualsPyStr("rainbow", fooType.get("socks"));
+        assertEqualsPyStr("rainbow", foo.get("socks"));
+        assertEqualsPyStr("cap",  fooType.get("hat"));
+        assertEqualsPyStr("cap",  bar.get("hat"));
+    }
+    
     // –––––– Helpers ––––––
 
     private void assertEqualsPyStr(String str, PythonObject pyobj) {
