@@ -137,9 +137,10 @@ class JavaObjectType(JavaType):
             raise NoSuchJavaMethod("{0} has no method named {1}".format(self.name, name))
 
     def is_subtype_of(self, other):   #overrides the method
-        return self == other
-
-
+        return self == other or any(
+            supertype.is_subtype_of(other) for supertype in self.direct_supertypes        #this was complicated for me to figure out outside of office hours but self == other only catches exact matches I saw in the tests so Rectangle will not count as a subtype of GraphicsObject or Object, that is why we need to walk through the supertype chain
+        )
+    
 class JavaVoidType(JavaType):
     """The Java type `void`.
 
@@ -156,8 +157,19 @@ class JavaNullType(JavaType):
     Null acts as though it is a subtype of all object types. However, it raises an exception for any
     attempt to look up a method.
     """
+
+    is_object_type = True
+    
     def __init__(self):
         super().__init__("null")
+
+    def is_subtype_of(self, other):
+        return other.is_object_type
+
+    def method_named(self, method_name):
+        raise NoSuchJavaMethod("Cannot invoke method {0}() on null".format(
+            method_name)
+            )
 
 
 class JavaTypeError(Exception):
