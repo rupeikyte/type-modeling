@@ -1,0 +1,11 @@
+Reflection, Ruta R.
+
+ in your type-modeling repository, and write some notes — just a few sentences! — about aspects of this comparison that struck you. Tell me what you see.
+
+ I honestly found this assignment really challenging. I think I came to a standstill with parts 2.1/2.2
+ and since the office hour times didn't work for my schedule I really just wanted to avoid this because
+ I felt like I couldn't proceed. I would try different things that I saw in different parts of the code, 
+ and the tests would still fail. I am super happy to have this done, however, I really did not enjoy the 
+ process because of how approached it. I think I need to work more being able to send my questions in Slack. 
+ Since I couldn't quite put my finger on what was I not understanding before I understood it, I also found it 
+ challenging to reach out via text, which became its own self perpertuating cycle.
