@@ -1,6 +1,25 @@
 Reflection, Ruta R.
 
- in your type-modeling repository, and write some notes — just a few sentences! — about aspects of this comparison that struck you. Tell me what you see.
+Key differences I found comparing my solution vs. Paul's:
+
+In JavaMethodCall my check_types() method is significantly longer because I did not utilize a helper
+method. _check_arg_types. Honestly my check_types(), while it works is super convoluted so a helper could
+have been useful and it really made Paul's code look more intuitive. At the same time my version does everything, argument
+checks, count check and type check.
+
+Next, I used return instead of pass when I needed to return nothing, which according to the hint in the assignment
+means the same thing. I also would name my variables a little bit more explicitly which I personally prefer when reading code
+(like t vs supertype in part 2.1).
+
+For PyhtonObject.buildMRO my code has a null check which means that my version runs for ordinary objects, whereas Paul's assumes 
+an ordinary object always has a type. If this assumption fell, my code would just return and I think Paul's would throw an exception.
+
+I saw the key difference in PythonType.buildMRO where Paul's version adds three things: itself, its base’s MRO (if the base isn’t null), 
+and its own type’s MRO (if the type isn’t null). I just added itself and its base’s MRO, and then stopped. All the tests for me passed 
+because I don't think they test this, but mine only searches the class chain, so an attribute defined on the metaclass would be found by 
+Paul's solution only I think.
+
+I also write if with braces which I think makes the code clearer and is a good addition.
 
  I honestly found this assignment really challenging. I think I came to a standstill with parts 2.1/2.2
  and since the office hour times didn't work for my schedule I really just wanted to avoid this because
